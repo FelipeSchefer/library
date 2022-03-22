@@ -23,12 +23,5 @@ public class RentBook {
 	
 	public void setBook(Book book) {
 		this.book = book;
-		saveBook(book);
-	}
-	
-	Book bk = new Book();
-	User us = new User();
-	public void saveBook(Book book) {
-	 	us.setBook(book);
 	}
 }

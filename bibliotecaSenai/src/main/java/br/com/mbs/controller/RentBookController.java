@@ -36,32 +36,21 @@ public class RentBookController {
 	})
 	@RequestMapping(value = "/save-rent/", method = RequestMethod.POST)	 
 	public ResponseEntity<Integer> saveRent(
-			@RequestParam("User: ") User user,
-			@RequestParam("Book: ") Book book)
+			@RequestParam("User: ") User user)
 
 			throws Exception {		 
-		
 		System.out.println("Saving Book...");
 		
-		if(user.getId() == 1) {
-			System.out.println("User name" + user.getName());			
-		}
-		
-		User us = new User();
-//		Book bk = new Book();		
 		RentBook rent = new RentBook();
-		
-		us.setBook(book);
+
 		rent.setUser(user);
-		rent.setBook(book);
 		rent.setId(counter);
 
 		
-		mapRentBook.put(counter, rent);
-		
+		mapRentBook.put(counter, rent);		
 		counter++;
 		
-		return ResponseEntity.ok(book.getId());
+		return ResponseEntity.ok(rent.getId());
 	}
 	
 	

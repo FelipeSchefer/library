@@ -1,5 +1,6 @@
 package br.com.mbs.controller;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.mbs.entidades.Book;
+import br.com.mbs.entidades.User;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponses;
@@ -23,35 +25,83 @@ public class BookController {
 	Map<Integer, Book> mapBook = new HashMap<Integer, Book>();
 	Integer counter = 1;
 	
+//	@ApiOperation(value = "Save a book")
+//	@ApiResponses(value = {
+//			@ApiResponse(code = 200, message = "Book saved sucessfully", response = String.class),
+//			@ApiResponse(code = 405, message = "Problem validating the book", response = String.class),
+//			@ApiResponse(code = 500, message = "Error in the server")
+//	})
+//	@RequestMapping(value = "/save/", method = RequestMethod.POST)	 
+//	public ResponseEntity<Integer> saveUser(
+//			@RequestParam("Title: ") String title,
+//			@RequestParam("Author: ") String author,
+//			@RequestParam("Synopsis: ") String synopsis,
+//			@RequestParam("Year Book: ") Integer yearBook,
+//			@RequestParam("Number Pages: ") Integer numPage)
+//			throws Exception {		 
+//		
+//		System.out.println("Saving Book...");
+//		
+//		Book book = new Book();
+//		book.setTitle(title);
+//		book.setAuthor(author);
+//		book.setSynopsis(synopsis);
+//		book.setYearBook(yearBook);
+//		book.setNumPage(numPage);
+//		book.setId(counter);
+//		
+//		mapBook.put(counter, book);
+//		
+//		counter++;
+//		
+//		return ResponseEntity.ok(book.getId());
+//	}
+//	
 	@ApiOperation(value = "Save a book")
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Book saved sucessfully", response = String.class),
 			@ApiResponse(code = 405, message = "Problem validating the book", response = String.class),
 			@ApiResponse(code = 500, message = "Error in the server")
 	})
-	@RequestMapping(value = "/save/", method = RequestMethod.POST)	 
+	@RequestMapping(value = "/buy/", method = RequestMethod.POST)	 
 	public ResponseEntity<Integer> saveUser(
-			@RequestParam("Title: ") String title,
-			@RequestParam("Author: ") String author,
-			@RequestParam("Synopsis: ") String synopsis,
-			@RequestParam("Year Book: ") Integer yearBook,
-			@RequestParam("Number Pages: ") Integer numPage)
+			@RequestParam("id: ") int id,
+			@RequestParam("page: ") int page,
+			@RequestParam("year: ") int year)
 			throws Exception {		 
 		
 		System.out.println("Saving Book...");
 		
-		Book book = new Book();
-		book.setTitle(title);
-		book.setAuthor(author);
-		book.setSynopsis(synopsis);
-		book.setYearBook(yearBook);
-		book.setNumPage(numPage);
+		Book book = new Book(id, page, year);
+		
+		User us = new User();
+		
+		List<Book> listOfBooks = new ArrayList<>();
+		
+		listOfBooks.add(book);
+		
+		System.out.println(listOfBooks);
+		
+//		for(int i= 0; i < user.size(); i++ ) {
+//			System.out.println(user.get(i));
+//		}
+//		user.add(book);
+//		Collections.sort(user);
+//		for(User i : user) {
+//			System.out.println(i);
+//		}
+		
+		
+//		if (book.getId() == us.getId()) {
+//			user.add(book);
+//		}
+		
+//		book.setTitle(title);
 		book.setId(counter);
 		
 		mapBook.put(counter, book);
-		
 		counter++;
-		
+		System.out.println("saved");
 		return ResponseEntity.ok(book.getId());
 	}
 	
